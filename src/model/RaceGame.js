@@ -33,4 +33,13 @@ export class RaceGame {
       onRound(this.#players);
     }
   }
+
+  /**
+   * @param {{onEnd: (winnersName: string) => void}} callback { onEnd: (winnersName: string) => void }
+   */
+  finish({ onEnd }) {
+    const winners = this.#gameManager.determineWinners(this.#players);
+    const winnersName = winners.map((winner) => winner.name).join(', ');
+    onEnd(winnersName);
+  }
 }
