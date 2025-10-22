@@ -21,4 +21,16 @@ export class RaceGame {
     }
     this.#gameManager = gameManager;
   }
+
+  /**
+   * @param {{onStart: () => void, onRound: (players: Player[]) => void}} callback { onStart: () => void, onRound: (players: Player[]) => void }
+   */
+  start({ onStart, onRound }) {
+    onStart();
+    const maxCount = this.#gameManager.maxCount;
+    for (let count = 0; count < maxCount; count++) {
+      this.#gameManager.race(this.#players);
+      onRound(this.#players);
+    }
+  }
 }
