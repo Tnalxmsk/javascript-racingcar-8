@@ -6,8 +6,8 @@ export class Player {
     this.#name = name;
   }
 
-  move(distance) {
-    this.#distanceCount += distance;
+  move() {
+    this.#distanceCount++;
   }
 
   get distanceCount() {
