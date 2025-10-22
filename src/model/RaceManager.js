@@ -22,6 +22,13 @@ export class RaceManager {
     this.#currentCount++;
   }
 
+
+  determineWinners(players) {
+    const maxDistanceCount = Math.max(...players.map((player) => player.distanceCount));
+    const winners = players.filter((player) => player.distanceCount === maxDistanceCount);
+    return winners;
+  }
+
   get currentCount() {
     return this.#currentCount;
   }
