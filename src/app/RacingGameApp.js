@@ -1,6 +1,7 @@
 import { RaceGame } from "../model/RaceGame.js";
 import { InputView } from "../ui/InputView.js";
 import { Player } from "../model/Player.js";
+import { RaceManager } from "../model/RaceManager.js";
 
 let instance;
 
@@ -12,17 +13,19 @@ export default class RacingGameApp {
     instance = this;
   }
 
-  start() {
-    this.run();
+  async start() {
+    await this.run();
   }
 
-  run() {
+  async run() {
     const raceGame = new RaceGame();
     const inputView = new InputView();
-    const players = inputView.readPlayersName().map((name) => new Player(name));
-
+    const names = await inputView.readPlayersName();
+    const players = names.map((name) => new Player(name));
+    const maxCount = await inputView.readAttemptCount();
+    const raceManager = new RaceManager(maxCount);
 
     raceGame.registerPlayers(players);
-
+    raceGame.registerGameManager(raceManager);
   }
 }
