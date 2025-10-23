@@ -57,11 +57,11 @@ export default class Validator {
     if (this.#hasSpace(input)) {
       throw new Error('[ERROR] 시도 횟수에 공백이 포함될 수 없습니다.');
     }
-    if (this.#isNotNatureNumber(input)) {
+    if (!this.#isNatureNumber(input)) {
       throw new Error('[ERROR] 시도 횟수는 1이상인 자연수여야 합니다.');
     }
     if (this.#isExceedMaxAttemptCount(input)) {
-      throw new Error('[ERROR] 최대 시도 횟수를 초과하였습니다. 99회까지 가능합니다.')
+      throw new Error('[ERROR] 최대 시도 횟수를 초과하였습니다. 99회까지 가능합니다.');
     }
   }
 
@@ -80,13 +80,11 @@ export default class Validator {
   }
 
   #hasInvalidNameFormat(names) {
-    const invalidName = names.some(name => !NAME_FORMAT_REGEX.test(name));
-    return invalidName;
+    return names.some(name => !NAME_FORMAT_REGEX.test(name));
   }
 
   #isValidNameCount(names) {
-    const invalidNameCount = names.length > MAX_NAMES_COUNT;
-    return !invalidNameCount;
+    return names.length <= MAX_NAMES_COUNT;
   }
 
   #isValidNameLength(names) {
@@ -99,11 +97,11 @@ export default class Validator {
     return names.length !== uniqueNames.size;
   }
 
-  #isNotNatureNumber(input) {
-    return !Number.isInteger(+input) || input <= 0;
+  #isNatureNumber(input) {
+    return Number.isInteger(+input) && input > 0;
   }
 
   #isExceedMaxAttemptCount(input) {
-    return parseInt(input) > MAX_ATTEMPTS;
+    return Number.isInteger(input) > MAX_ATTEMPTS;
   }
 }
