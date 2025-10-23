@@ -1,4 +1,5 @@
 import {
+  MAX_ATTEMPTS,
   MAX_NAME_LENGTH,
   MAX_NAMES_COUNT,
   NAME_FORMAT_REGEX,
@@ -50,6 +51,18 @@ export default class Validator {
    * @param {string} input
    */
   validateAttemptCount(input) {
+    if (this.#isEmpty(input)) {
+      throw new Error('[ERROR] 시도 횟수는 빈 값이 입력되면 안됩니다.');
+    }
+    if (this.#hasSpace(input)) {
+      throw new Error('[ERROR] 시도 횟수에 공백이 포함될 수 없습니다.');
+    }
+    if (this.#isNotNatureNumber(input)) {
+      throw new Error('[ERROR] 시도 횟수는 1이상인 자연수여야 합니다.');
+    }
+    if (this.#isExceedMaxAttemptCount(input)) {
+      throw new Error('[ERROR] 최대 시도 횟수를 초과하였습니다. 99회까지 가능합니다.')
+    }
   }
 
   // 빈 값
@@ -84,5 +97,13 @@ export default class Validator {
   #hasDuplicateName(names) {
     const uniqueNames = new Set(names);
     return names.length !== uniqueNames.size;
+  }
+
+  #isNotNatureNumber(input) {
+    return !Number.isInteger(+input) || input <= 0;
+  }
+
+  #isExceedMaxAttemptCount(input) {
+    return parseInt(input) > MAX_ATTEMPTS;
   }
 }
