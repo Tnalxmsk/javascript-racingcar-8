@@ -68,16 +68,16 @@
     - 공통
         - 빈 값이 아닌지 검증한다.                   (isEmpty)
         - 공백이 포함되었는지 검증한다.                (hasSpace)
-    - 자동차 이름을 검증한다.
+    - 자동차 이름을 검증한다.                        (validateNames)
         - 입력된 자동차 대수가 10대 이하인지 검증한다.    (isInvalidNameCount)
         - 5자 이하인지 검증한다.                     (isInvalidNameLength)
         - 한글과 영문으로 이루어진 문자인지 검증한다.      (hasInvalidNameFormat)
             - 한글의 경우 단순 자음, 모음의 조합인지 검증한다.
         - 구분자 ,로 올바르게 구분되었는지 검증한다.      (hasInvalidSeparator)
         - 중복된 이름이 없는지 검증한다.               (haseDuplicateName)
-    - 시도 횟수를 검증한다.
-        - 자연수인지 검증한다.
-        - 100회 초과 하지 않는지 검증한다.
+    - 시도 횟수를 검증한다.                          (validateAttemptCount)
+        - 자연수인지 검증한다.                       (isNotNatureNumber)
+        - 100회 초과 하지 않는지 검증한다.             (isExceedMaxAttemptCount)
 
 ## 입출력 요구 사항
 
