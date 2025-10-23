@@ -24,6 +24,7 @@ export class RaceGame {
 
   /**
    * @param {{onStart: () => void, onRound: (players: Player[]) => void}} callback { onStart: () => void, onRound: (players: Player[]) => void }
+   * 게임을 시작하고 라운드 진행 결과 출력을 위한 콜백함수를 전달 받습니다.
    */
   start({ onStart, onRound }) {
     onStart();
