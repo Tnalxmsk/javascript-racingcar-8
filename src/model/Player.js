@@ -2,6 +2,9 @@ export class Player {
   #name;
   #distanceCount = 0;
 
+  /**
+   * @param {string} name
+   */
   constructor(name) {
     this.#name = name;
   }
