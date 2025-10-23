@@ -1,11 +1,10 @@
-import {
-  MAX_ATTEMPTS,
-  MAX_NAME_LENGTH,
-  MAX_NAMES_COUNT,
-  NAME_FORMAT_REGEX,
-  NAME_SEPARATOR_REGEX,
-} from "../const/rule.js";
 import { parseNames } from "./parse.js";
+
+const nameFormatRegex = /^[a-zA-Z가-힣]+$/;
+const nameSeparatorRegex = /[^a-zA-Z가-힣,]/;
+const maxNamesCount = 10;
+const maxNameLength = 5;
+const maxAttemptCount = 99;
 
 let instance;
 
@@ -76,19 +75,19 @@ export default class Validator {
   }
 
   #hasInvalidSeparator(input) {
-    return NAME_SEPARATOR_REGEX.test(input);
+    return nameSeparatorRegex.test(input);
   }
 
   #hasInvalidNameFormat(names) {
-    return names.some(name => !NAME_FORMAT_REGEX.test(name));
+    return names.some(name => !nameFormatRegex.test(name));
   }
 
   #isValidNameCount(names) {
-    return names.length <= MAX_NAMES_COUNT;
+    return names.length <= maxNamesCount;
   }
 
   #isValidNameLength(names) {
-    const invalidName = names.some(name => name.length > MAX_NAME_LENGTH);
+    const invalidName = names.some(name => name.length > maxNameLength);
     return !invalidName;
   }
 
@@ -102,6 +101,6 @@ export default class Validator {
   }
 
   #isExceedMaxAttemptCount(input) {
-    return Number.isInteger(input) > MAX_ATTEMPTS;
+    return Number.isInteger(input) > maxAttemptCount;
   }
 }
