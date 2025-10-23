@@ -7,3 +7,4 @@ export const NAME_FORMAT_REGEX = /^[a-zA-Z가-힣]+$/;
 export const NAME_SEPARATOR_REGEX = /[^a-zA-Z가-힣,]/;
 export const MAX_NAMES_COUNT = 10;
 export const MAX_NAME_LENGTH = 5;
+export const MAX_ATTEMPTS = 99;
