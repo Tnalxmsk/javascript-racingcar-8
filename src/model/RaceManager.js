@@ -1,5 +1,5 @@
-import RandomNumberGenerator from "../util/RandomNumberGenerator.js";
-import { MIN_MOVE_NUMBER } from "../const/rule.js";
+import { MAX_RANDOM_NUMBER, MIN_MOVE_NUMBER, MIN_RANDOM_NUMBER } from "../const/rule.js";
+import { Random } from "@woowacourse/mission-utils";
 
 export class RaceManager {
   #currentCount = 0;
@@ -21,7 +21,7 @@ export class RaceManager {
       return;
     }
     players.forEach((player) => {
-      const generatedNumber = new RandomNumberGenerator().generate();
+      const generatedNumber = Random.pickNumberInRange(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
       if (generatedNumber >= MIN_MOVE_NUMBER) {
         player.move();
       }
