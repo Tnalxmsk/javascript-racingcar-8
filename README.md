@@ -3,8 +3,8 @@
 ## 과제 진행 요구 사항
 
 - [x] 미션은 자동차 경주 저장소를 포크하고 클론하는 것으로 시작한다.
-- [ ] 기능을 구현하기 전 README.md 에 구현할 기능 목록을 정리해 추가한다.
-- [ ] Git 커밋 단위는 앞 단계에서 README.md 에 정리한 기능 목록 단위로 추가한다.
+- [x] 기능을 구현하기 전 README.md 에 구현할 기능 목록을 정리해 추가한다.
+- [x] Git 커밋 단위는 앞 단계에서 README.md 에 정리한 기능 목록 단위로 추가한다.
 - [x] 자세한 과제 진행 방법은 프리코스 진행 가이드 문서를 참고한다.
 
 ## 기능 요구 사항
@@ -45,109 +45,39 @@
 
 ## 기능 목록
 
-- 참여자
-    - 이동 거리가 증가한다.
-- 난수 생성기
-    - 난수를 생성한다.
-- 레이스 매니저
-    - 단일 레이스를 실행한다.
-    - 최종 우승자를 결정한다.
-- 레이싱 게임 앱
+- 참여자 (Player)
+    - 이동 거리가 증가한다. (move)
+- 레이스 매니저 (RaceManager)
+    - 단일 레이스를 실행한다. (race)
+    - 최종 우승자를 결정한다. (determineWinners)
+- 레이싱 게임 앱 (RacingGameApp)
     - 레이싱앱을 실행한다.
-    - 플레이어를 등록한다.
-    - 레이싱 횟수를 등록한다.
-    - 레이싱을 시작한다.
-    - 우승자를 안내한다.
-- 입력
-    - 자동차 이름을 입력 받는다.
-    - 시도 횟수를 입력 받는다.
-- 출력
-    - 차수별 실행 결과를 출력한다.
-    - 우승자 안내 문구를 출력한다.
-- 검증
+- 레이싱 게임 (RaceGame)
+    - 플레이어를 등록한다. (registerPlayers)
+    - 게임 메니저를 등록한다. (registerGameManager)
+    - 레이싱을 시작한다. (start)
+    - 레이스를 마무리한다. (finish)
+- 입력 (InputView)
+    - 자동차 이름을 입력 받는다. (readPlayersName)
+    - 시도 횟수를 입력 받는다.   (readAttemptCount)
+- 출력 (OutputView)
+    - 레이스 시작 문구를 출력한다. (printRaceStart)
+    - 차수별 실행 결과를 출력한다. (printRoundResult)
+    - 우승자 안내 문구를 출력한다. (printRaceWinners)
+- 검증 (Validator)
     - 공통
-        - 빈 값이 아닌지 검증한다.                   (isEmpty)
-        - 공백이 포함되었는지 검증한다.                (hasSpace)
+        - 빈 값이 아닌지 검증한다.                   (validateEmpty)
+        - 공백이 포함되었는지 검증한다.                (validateNoSpace)
     - 자동차 이름을 검증한다.                        (validateNames)
-        - 입력된 자동차 대수가 10대 이하인지 검증한다.    (isInvalidNameCount)
-        - 5자 이하인지 검증한다.                     (isInvalidNameLength)
-        - 한글과 영문으로 이루어진 문자인지 검증한다.      (hasInvalidNameFormat)
+        - 입력된 자동차 대수가 10대 이하인지 검증한다.    (validateNameCount)
+        - 5자 이하인지 검증한다.                     (validateNameLength)
+        - 한글과 영문으로 이루어진 문자인지 검증한다.      (validateNameFormat)
             - 한글의 경우 단순 자음, 모음의 조합인지 검증한다.
-        - 구분자 ,로 올바르게 구분되었는지 검증한다.      (hasInvalidSeparator)
-        - 중복된 이름이 없는지 검증한다.               (haseDuplicateName)
+        - 구분자 ,로 올바르게 구분되었는지 검증한다.      (validateSeparator)
+        - 중복된 이름이 없는지 검증한다.               (validateNoDuplicateName)
     - 시도 횟수를 검증한다.                          (validateAttemptCount)
-        - 자연수인지 검증한다.                       (isNotNatureNumber)
-        - 100회 초과 하지 않는지 검증한다.             (isExceedMaxAttemptCount)
-
-## 입출력 요구 사항
-
-### 입력
-
-- 경주할 자동차 이름(쉼표 기준 구분)
-
-```
-pobi,woni,jun
-```
-
-- 시도할 횟수
-
-```
-5
-```
-
-### 출력
-
-- 차수별 실행 결과
-
-```
-pobi : --
-woni : ----
-jun : ---
-```
-
-- 단독 우승자 안내 문구
-
-```
-최종 우승자 : pobi
-```
-
-- 공동 우승자 안내 문구
-
-```
-최종 우승자 : pobi, jun
-```
-
-### 실행 결과 예시
-
-```
-경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)
-pobi,woni,jun
-시도할 횟수는 몇 회인가요?
-5
-
-실행 결과
-pobi : -
-woni : 
-jun : -
-
-pobi : --
-woni : -
-jun : --
-
-pobi : ---
-woni : --
-jun : ---
-
-pobi : ----
-woni : ---
-jun : ----
-
-pobi : -----
-woni : ----
-jun : -----
-
-최종 우승자 : pobi, jun
-```
+        - 자연수인지 검증한다.                       (validateNatureNumber)
+        - 100회 초과 하지 않는지 검증한다.             (validateMaxAttemptCount)
 
 ## 신규 프로그래밍 요구 사항
 
