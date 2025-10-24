@@ -38,57 +38,57 @@ export class Validator {
     this.#validateMaxAttemptCount(input);
   }
 
-  #validateEmptyValue(input) {
+  static #validateEmptyValue(input) {
     if (input === emptyString || input == null) {
       throw new Error('[ERROR] 값이 비어있을 수 없습니다.');
     }
   }
 
-  #validateNoSpace(input) {
+  static #validateNoSpace(input) {
     if (input.includes(space)) {
       throw new Error('[ERROR] 공백이 포함될 수 없습니다.');
     }
   }
 
-  #validateSeparator(input) {
+  static #validateSeparator(input) {
     if (nameSeparatorRegex.test(input)) {
       throw new Error(`[ERROR] 이름에 잘못된 구분자가 포함되어 있습니다. 올바른 구분자는 쉼표(${NAME_SEPARATOR})입니다.`);
     }
   }
 
-  #validateNameFormat(names) {
+  static #validateNameFormat(names) {
     if (names.some(name => !nameFormatRegex.test(name))) {
       throw new Error('[ERROR] 잘못된 이름 양식입니다. 영문자, 한글의 조합만 가능합니다.');
     }
   }
 
-  #validateNameCount(names) {
+  static #validateNameCount(names) {
     if (names.length > maxNamesCount) {
       throw new Error(`[ERROR] 이름은 최대 ${maxNamesCount}개까지 가능합니다.`);
     }
   }
 
-  #validateNameLength(names) {
+  static #validateNameLength(names) {
     const invalidName = names.some(name => name.length > maxNameLength);
     if (invalidName) {
       throw new Error(`[ERROR] 각 이름은 최대 ${maxNameLength}자 이하만 가능합니다.`);
     }
   }
 
-  #validateNoDuplicateName(names) {
+  static #validateNoDuplicateName(names) {
     const uniqueNames = new Set(names);
     if (names.length !== uniqueNames.size) {
       throw new Error('[ERROR] 중복된 이름이 포함되어 있습니다.');
     }
   }
 
-  #validateNatureNumber(input) {
+  static #validateNatureNumber(input) {
     if (!(Number.isInteger(+input) && input >= minAttemptCount)) {
       throw new Error(`[ERROR] 시도 횟수는 ${minAttemptCount}이상인 자연수여야 합니다.`);
     }
   }
 
-  #validateMaxAttemptCount(input) {
+  static #validateMaxAttemptCount(input) {
     if (parseInt(input, radix) > maxAttemptCount) {
       throw new Error(`[ERROR] 최대 ${maxAttemptCount}회까지 가능합니다.`);
     }
