@@ -1,0 +1,27 @@
+export const ERROR_TYPES = {
+  EMPTY_VALUE: 'EMPTY_VALUE',
+  CONTAINS_SPACE: 'CONTAINS_SPACE',
+  INVALID_SEPARATOR: 'INVALID_SEPARATOR',
+  INVALID_NAME_FORMAT: 'INVALID_NAME_FORMAT',
+  TOO_MANY_NAMES: 'TOO_MANY_NAMES',
+  NAME_TOO_LONG: 'NAME_TOO_LONG',
+  DUPLICATE_NAME: 'DUPLICATE_NAME',
+  INVALID_ATTEMPT_COUNT: 'INVALID_ATTEMPT_COUNT',
+  MAX_ATTEMPT_EXCEEDED: 'MAX_ATTEMPT_EXCEEDED',
+};
+
+export const ERROR_STATUS = {
+  [ERROR_TYPES.EMPTY_VALUE]: '[ERROR] 값이 비어있을 수 없습니다.',
+  [ERROR_TYPES.CONTAINS_SPACE]: '[ERROR] 공백이 포함될 수 없습니다.',
+  [ERROR_TYPES.INVALID_SEPARATOR]: '[ERROR] 이름에 잘못된 구분자가 포함되어 있습니다. 올바른 구분자는 쉼표(,)입니다.',
+  [ERROR_TYPES.INVALID_NAME_FORMAT]: '[ERROR] 잘못된 이름 양식입니다. 영문자, 한글의 조합만 가능합니다.',
+  [ERROR_TYPES.TOO_MANY_NAMES]: '[ERROR] 이름은 최대 10개까지 가능합니다.',
+  [ERROR_TYPES.NAME_TOO_LONG]: '[ERROR] 각 이름은 최대 5자 이하만 가능합니다.',
+  [ERROR_TYPES.DUPLICATE_NAME]: '[ERROR] 중복된 이름이 포함되어 있습니다.',
+  [ERROR_TYPES.INVALID_ATTEMPT_COUNT]: '[ERROR] 시도 횟수는 1이상인 자연수여야 합니다.',
+  [ERROR_TYPES.MAX_ATTEMPT_EXCEEDED]: '[ERROR] 최대 100회까지 가능합니다.',
+};
+
+export const throwError = (type) => {
+  throw new Error(ERROR_STATUS[type]);
+};
