@@ -12,7 +12,6 @@ const emptyString = '';
 const space = ' ';
 
 export class Validator {
-
   /**
    * @param {string} input
    */
