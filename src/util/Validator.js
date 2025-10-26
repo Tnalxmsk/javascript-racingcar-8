@@ -51,7 +51,7 @@ export class Validator {
 
   static #validateSeparator(input) {
     if (nameSeparatorRegex.test(input)) {
-      throw new Error(`[ERROR] 이름에 잘못된 구분자가 포함되어 있습니다. 올바른 구분자는 쉼표(${NAME_SEPARATOR})입니다.`);
+      throw new Error(`[ERROR] 이름에 잘못된 구분자가 포함되어 있습니다. 올바른 구분자는 쉼표(,)입니다.`);
     }
   }
 
@@ -63,14 +63,14 @@ export class Validator {
 
   static #validateNameCount(names) {
     if (names.length > maxNamesCount) {
-      throw new Error(`[ERROR] 이름은 최대 ${maxNamesCount}개까지 가능합니다.`);
+      throw new Error(`[ERROR] 이름은 최대 10개까지 가능합니다.`);
     }
   }
 
   static #validateNameLength(names) {
     const invalidName = names.some(name => name.length > maxNameLength);
     if (invalidName) {
-      throw new Error(`[ERROR] 각 이름은 최대 ${maxNameLength}자 이하만 가능합니다.`);
+      throw new Error(`[ERROR] 각 이름은 최대 5자 이하만 가능합니다.`);
     }
   }
 
@@ -83,13 +83,13 @@ export class Validator {
 
   static #validateNatureNumber(input) {
     if (!(Number.isInteger(+input) && input >= minAttemptCount)) {
-      throw new Error(`[ERROR] 시도 횟수는 ${minAttemptCount}이상인 자연수여야 합니다.`);
+      throw new Error(`[ERROR] 시도 횟수는 1이상인 자연수여야 합니다.`);
     }
   }
 
   static #validateMaxAttemptCount(input) {
     if (parseInt(input, radix) > maxAttemptCount) {
-      throw new Error(`[ERROR] 최대 ${maxAttemptCount}회까지 가능합니다.`);
+      throw new Error(`[ERROR] 최대 100회까지 가능합니다.`);
     }
   }
 }
