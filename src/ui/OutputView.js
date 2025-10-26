@@ -14,7 +14,7 @@ export class OutputView {
       const { name, distanceCount } = player;
       Console.print(`${name} : ${DISTANCE_FORMAT.repeat(distanceCount)}`);
     });
-    console.log();
+    Console.print("");
   }
 
   printRaceWinners(winnersName) {
