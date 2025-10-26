@@ -1,5 +1,5 @@
 import { parseNames } from "./parse.js";
-import { NAME_SEPARATOR } from "../const/rule.js";
+import { ERROR_TYPES, throwError } from "./error.js";
 
 const nameFormatRegex = /^[a-zA-Z가-힣]+$/;
 const nameSeparatorRegex = /[^a-zA-Z가-힣,]/;
@@ -39,57 +39,57 @@ export class Validator {
 
   static #validateEmptyValue(input) {
     if (input === emptyString || input == null) {
-      throw new Error('[ERROR] 값이 비어있을 수 없습니다.');
+      throwError(ERROR_TYPES.EMPTY_VALUE);
     }
   }
 
   static #validateNoSpace(input) {
     if (input.includes(space)) {
-      throw new Error('[ERROR] 공백이 포함될 수 없습니다.');
+      throwError(ERROR_TYPES.CONTAINS_SPACE);
     }
   }
 
   static #validateSeparator(input) {
     if (nameSeparatorRegex.test(input)) {
-      throw new Error(`[ERROR] 이름에 잘못된 구분자가 포함되어 있습니다. 올바른 구분자는 쉼표(,)입니다.`);
+      throwError(ERROR_TYPES.INVALID_SEPARATOR);
     }
   }
 
   static #validateNameFormat(names) {
     if (names.some(name => !nameFormatRegex.test(name))) {
-      throw new Error('[ERROR] 잘못된 이름 양식입니다. 영문자, 한글의 조합만 가능합니다.');
+      throwError(ERROR_TYPES.INVALID_NAME_FORMAT);
     }
   }
 
   static #validateNameCount(names) {
     if (names.length > maxNamesCount) {
-      throw new Error(`[ERROR] 이름은 최대 10개까지 가능합니다.`);
+      throwError(ERROR_TYPES.TOO_MANY_NAMES);
     }
   }
 
   static #validateNameLength(names) {
     const invalidName = names.some(name => name.length > maxNameLength);
     if (invalidName) {
-      throw new Error(`[ERROR] 각 이름은 최대 5자 이하만 가능합니다.`);
+      throwError(ERROR_TYPES.NAME_TOO_LONG);
     }
   }
 
   static #validateNoDuplicateName(names) {
     const uniqueNames = new Set(names);
     if (names.length !== uniqueNames.size) {
-      throw new Error('[ERROR] 중복된 이름이 포함되어 있습니다.');
+      throwError(ERROR_TYPES.DUPLICATE_NAME);
     }
   }
 
   static #validateNatureNumber(input) {
     if (!(Number.isInteger(+input) && input >= minAttemptCount)) {
-      throw new Error(`[ERROR] 시도 횟수는 1이상인 자연수여야 합니다.`);
+      throwError(ERROR_TYPES.INVALID_ATTEMPT_COUNT);
     }
   }
 
   static #validateMaxAttemptCount(input) {
     if (parseInt(input, radix) > maxAttemptCount) {
-      throw new Error(`[ERROR] 최대 100회까지 가능합니다.`);
+      throwError(ERROR_TYPES.MAX_ATTEMPT_EXCEEDED);
     }
   }
 }
